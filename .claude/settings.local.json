@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(./node_modules/.bin/tailwindcss init:*)",
+      "Bash(ls node_modules/.bin/tailwind*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3001/platform)",
+      "Bash(npx tsc:*)",
+      "Bash(/usr/bin/curl --version)",
+      "Bash(lsof -ti:3000,3001)",
+      "Bash(kill -9 39515 46240)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill:*)",
+      "Bash(lsof -ti:3001)"
+    ]
+  }
+}
