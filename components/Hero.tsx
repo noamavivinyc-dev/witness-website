@@ -34,16 +34,16 @@ export default function Hero() {
           A real-time, map-based citizen journalism platform. Anyone reports what they see. The world watches it unfold. The truth emerges through transparency — not editorial authority.
         </p>
 
-        <div className="flex flex-wrap gap-3 mb-16">
+        <div className="flex flex-col sm:flex-row gap-3 mb-16">
           <Link
             href="/platform"
-            className="font-mono text-[11px] tracking-[0.12em] uppercase px-7 py-3 bg-[#2E2B26] text-[#F2EFE9] no-underline cursor-pointer transition-colors hover:bg-[#E8440A]"
+            className="font-mono text-[11px] tracking-[0.12em] uppercase px-7 py-3 min-h-[44px] flex items-center justify-center bg-[#2E2B26] text-[#F2EFE9] no-underline cursor-pointer transition-colors hover:bg-[#E8440A]"
           >
             View Platform
           </Link>
           <Link
             href="/about"
-            className="font-mono text-[11px] tracking-[0.12em] uppercase px-7 py-3 bg-transparent text-[#2C2820] no-underline border border-[#CEC9BC] cursor-pointer transition-colors hover:border-[#E8440A] hover:text-[#E8440A]"
+            className="font-mono text-[11px] tracking-[0.12em] uppercase px-7 py-3 min-h-[44px] flex items-center justify-center bg-transparent text-[#2C2820] no-underline border border-[#CEC9BC] cursor-pointer transition-colors hover:border-[#E8440A] hover:text-[#E8440A]"
           >
             Read Overview
           </Link>

@@ -77,7 +77,7 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your name"
         />
       </div>
@@ -92,7 +92,7 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="your@email.com"
         />
       </div>
@@ -105,7 +105,7 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           name="category"
           value={formData.category}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
         >
           <option value="partnership">Partnership</option>
           <option value="investment">Investment</option>
@@ -123,7 +123,7 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           name="organization"
           value={formData.organization}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your organization"
         />
       </div>
@@ -137,7 +137,7 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.message}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A] resize-none"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A] resize-none"
           placeholder="Tell us more about your inquiry"
           rows={4}
         />

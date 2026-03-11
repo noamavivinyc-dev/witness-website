@@ -80,7 +80,7 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.organizationName}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your organization"
         />
       </div>
@@ -95,7 +95,7 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.contactName}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your name"
         />
       </div>
@@ -110,7 +110,7 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="your@email.com"
         />
       </div>
@@ -123,7 +123,7 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           name="organizationSize"
           value={formData.organizationSize}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A]"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
         >
           <option value="small">Small (&lt;50 staff)</option>
           <option value="medium">Medium (50–500 staff)</option>
@@ -140,7 +140,7 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.useCase}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-[#CEC9BC] rounded bg-white text-[#2C2820] focus:outline-none focus:border-[#E8440A] resize-none"
+          className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A] resize-none"
           placeholder="How would your organization use Witness?"
           rows={3}
         />

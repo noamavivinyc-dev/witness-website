@@ -44,14 +44,14 @@ export default function Navigation({ onCTA }: { onCTA: () => void }) {
           </div>
           <button
             onClick={onCTA}
-            className="font-mono text-[10px] tracking-[0.15em] uppercase px-5 py-2 bg-[#2E2B26] text-[#F2EFE9] border-none cursor-pointer transition-colors hover:bg-[#E8440A] rounded-sm"
+            className="font-mono text-[10px] tracking-[0.15em] uppercase px-5 py-3 min-h-[44px] bg-[#2E2B26] text-[#F2EFE9] border-none cursor-pointer transition-colors hover:bg-[#E8440A] rounded-sm"
           >
             Get Access
           </button>
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden flex flex-col gap-1 p-1 bg-transparent border-none cursor-pointer"
+            className="lg:hidden flex flex-col gap-1 p-3 min-w-[44px] min-h-[44px] items-center justify-center bg-transparent border-none cursor-pointer"
           >
             <span className={`w-5 h-0.5 bg-[#2C2820] transition-transform ${mobileOpen ? 'rotate-45 translate-y-[6px]' : ''}`}></span>
             <span className={`w-5 h-0.5 bg-[#2C2820] transition-opacity ${mobileOpen ? 'opacity-0' : ''}`}></span>
@@ -68,7 +68,7 @@ export default function Navigation({ onCTA }: { onCTA: () => void }) {
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="block px-8 py-3 font-mono text-[10px] tracking-[0.15em] uppercase text-[#4A453F] no-underline hover:text-[#E8440A] hover:bg-[#EAE6DE] transition-colors border-b border-[rgba(206,201,188,0.4)]"
+              className="block px-8 py-4 min-h-[44px] font-mono text-[11px] tracking-[0.15em] uppercase text-[#4A453F] no-underline hover:text-[#E8440A] hover:bg-[#EAE6DE] transition-colors border-b border-[rgba(206,201,188,0.4)]"
             >
               {link.label}
             </Link>
