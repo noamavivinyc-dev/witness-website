@@ -1,129 +1,85 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
-import { sendConfirmationEmail, sendAdminAlert } from '@/lib/email'
-import {
-  waitlistSchema,
-  newsroomSchema,
-  partnerSchema,
-  contactSchema,
-} from '@/lib/schemas'
+import { createClient } from '@supabase/supabase-js'
 
-const schemas: Record<string, any> = {
-  waitlist: waitlistSchema,
-  newsroom: newsroomSchema,
-  partner: partnerSchema,
-  contact: contactSchema,
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing Supabase credentials')
 }
+
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { formType, ...formData } = body
+    const { formType, email, name, ...rest } = body
 
-    // Validate form type
-    if (!schemas[formType]) {
+    if (!email) {
       return NextResponse.json(
-        { error: 'Invalid form type' },
+        { error: 'Email is required' },
         { status: 400 }
       )
     }
 
-    // Validate form data
-    const validated = schemas[formType].parse(formData)
-    const email = validated.email
-    const name = validated.name || validated.contactName || validated.organizationName
-
-    // Check if contact exists - use maybeSingle() instead of single()
-    const { data: existingContact } = await supabase
+    // Check if contact exists
+    const { data: existing } = await supabase
       .from('contacts')
-      .select('id, contact_type')
+      .select('id')
       .eq('email', email)
       .maybeSingle()
 
     let contactId: string
 
-    if (existingContact?.id) {
-      // Update existing contact
-      contactId = existingContact.id
-      await supabase
-        .from('contacts')
-        .update({
-          name,
-          contact_type: mapFormTypeToContactType(formType),
-          last_submission_at: new Date().toISOString(),
-        })
-        .eq('id', contactId)
+    if (existing?.id) {
+      contactId = existing.id
     } else {
-      // Create new contact
       const { data: newContact, error: insertError } = await supabase
         .from('contacts')
         .insert({
           email,
-          name,
-          contact_type: mapFormTypeToContactType(formType),
-          last_submission_at: new Date().toISOString(),
+          name: name || 'Unknown',
+          contact_type: formType,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         })
         .select('id')
         .single()
 
       if (insertError) {
-        throw new Error(`Failed to create contact: ${insertError.message}`)
+        throw insertError
       }
 
-      contactId = newContact!.id
+      contactId = newContact.id
     }
 
     // Store submission
-    await supabase.from('submissions').insert({
-      contact_id: contactId,
-      form_type: formType,
-      form_data: validated,
-      ip_address: req.headers.get('x-forwarded-for') || 'unknown',
-      user_agent: req.headers.get('user-agent') || '',
-      source_url: req.headers.get('referer') || '',
-    })
+    const { error: submitError } = await supabase
+      .from('submissions')
+      .insert({
+        contact_id: contactId,
+        form_type: formType,
+        form_data: { email, name, ...rest },
+        ip_address: req.headers.get('x-forwarded-for') || 'unknown',
+        user_agent: req.headers.get('user-agent') || '',
+        source_url: req.headers.get('referer') || '',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
 
-    // Send confirmation email to user
-    await sendConfirmationEmail(email, formType)
-
-    // Send admin alert
-    await sendAdminAlert(formType, name, email, validated)
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Thank you for your submission. Check your email for confirmation.',
-      },
-      { status: 200 }
-    )
-  } catch (error: any) {
-    console.error('Form submission error:', error)
-
-    // Return validation error details if from Zod
-    if (error.name === 'ZodError') {
-      return NextResponse.json(
-        {
-          error: 'Validation failed',
-          details: error.errors,
-        },
-        { status: 400 }
-      )
+    if (submitError) {
+      throw submitError
     }
 
     return NextResponse.json(
-      { error: error?.message || 'Something went wrong. Please try again.' },
+      { success: true, message: 'Thank you! Check your email.' },
+      { status: 200 }
+    )
+  } catch (error: any) {
+    console.error('Error:', error)
+    return NextResponse.json(
+      { error: error?.message || 'Submission failed' },
       { status: 500 }
     )
   }
-}
-
-function mapFormTypeToContactType(formType: string): string {
-  const mapping: Record<string, string> = {
-    waitlist: 'general_user',
-    newsroom: 'newsroom',
-    partner: 'partner',
-    contributor: 'contributor',
-    contact: 'general_user',
-  }
-  return mapping[formType] || 'general_user'
 }
