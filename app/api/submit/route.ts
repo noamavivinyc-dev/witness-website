@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     const name = validated.name || validated.contactName || validated.organizationName
 
     // Check if contact exists - use maybeSingle() instead of single()
-    const { data: existingContact, error: selectError } = await supabase
+    const { data: existingContact } = await supabase
       .from('contacts')
       .select('id, contact_type')
       .eq('email', email)
