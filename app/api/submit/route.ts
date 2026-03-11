@@ -1,158 +1,85 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-import { sendConfirmationEmail, sendAdminAlert } from '@/lib/email'
-import {
-  waitlistSchema,
-  newsroomSchema,
-  partnerSchema,
-  contactSchema,
-} from '@/lib/schemas'
-
-const schemas: Record<string, any> = {
-  waitlist: waitlistSchema,
-  newsroom: newsroomSchema,
-  partner: partnerSchema,
-  contact: contactSchema,
-}
 
 export async function POST(req: NextRequest) {
   try {
-    // Check credentials INSIDE the function, not at import time
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-    if (!supabaseUrl || !supabaseServiceKey) {
-      console.error('Missing env vars:', { supabaseUrl: !!supabaseUrl, supabaseServiceKey: !!supabaseServiceKey })
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      )
-    }
-
-    // Create client with service role key
-    const supabase = createClient(supabaseUrl, supabaseServiceKey)
-
     const body = await req.json()
-    const { formType, ...formData } = body
+    const { formType, email, name, contactName, organizationName, ...rest } = body
 
-    // Validate form type
-    if (!schemas[formType]) {
-      return NextResponse.json(
-        { error: 'Invalid form type' },
-        { status: 400 }
-      )
+    // Determine the name from whichever field is populated
+    const contactName_resolved = name || contactName || organizationName || 'Unknown'
+
+    // Call Supabase REST API directly with service role key
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+    if (!supabaseUrl || !serviceRoleKey) {
+      return NextResponse.json({ error: 'Server config error' }, { status: 500 })
     }
 
-    // Validate form data
-    const validated = schemas[formType].parse(formData)
-    const email = validated.email
-    const name = validated.name || validated.contactName || validated.organizationName
-
-    // Check if contact exists
-    const { data: existingContact, error: selectError } = await supabase
-      .from('contacts')
-      .select('id, contact_type')
-      .eq('email', email)
-      .maybeSingle()
-
-    if (selectError) {
-      console.error('Select error:', selectError)
-      throw new Error(`Failed to check contact: ${selectError.message}`)
-    }
-
-    let contactId: string
-
-    if (existingContact?.id) {
-      // Update existing contact
-      contactId = existingContact.id
-      const { error: updateError } = await supabase
-        .from('contacts')
-        .update({
-          name,
-          contact_type: mapFormTypeToContactType(formType),
-          last_submission_at: new Date().toISOString(),
-        })
-        .eq('id', contactId)
-
-      if (updateError) {
-        throw new Error(`Failed to update contact: ${updateError.message}`)
-      }
-    } else {
-      // Create new contact
-      const { data: newContact, error: insertError } = await supabase
-        .from('contacts')
-        .insert({
-          email,
-          name,
-          contact_type: mapFormTypeToContactType(formType),
-          last_submission_at: new Date().toISOString(),
-        })
-        .select('id')
-        .single()
-
-      if (insertError) {
-        console.error('Insert error:', insertError)
-        throw new Error(`Failed to create contact: ${insertError.message}`)
-      }
-
-      contactId = newContact!.id
-    }
-
-    // Store submission
-    const { error: submitError } = await supabase.from('submissions').insert({
-      contact_id: contactId,
-      form_type: formType,
-      form_data: validated,
-      ip_address: req.headers.get('x-forwarded-for') || 'unknown',
-      user_agent: req.headers.get('user-agent') || '',
-      source_url: req.headers.get('referer') || '',
+    // Insert into contacts table via REST API
+    const insertResponse = await fetch(`${supabaseUrl}/rest/v1/contacts`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${serviceRoleKey}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation',
+      },
+      body: JSON.stringify({
+        email,
+        name: contactName_resolved,
+        contact_type: formType === 'newsroom' ? 'newsroom' : 'general_user',
+        last_submission_at: new Date().toISOString(),
+      }),
     })
 
-    if (submitError) {
-      throw new Error(`Failed to store submission: ${submitError.message}`)
+    const insertData = await insertResponse.json()
+
+    if (!insertResponse.ok) {
+      console.error('Insert failed:', insertData)
+      throw new Error(insertData.message || 'Failed to insert contact')
     }
 
-    // Send confirmation email to user
-    await sendConfirmationEmail(email, formType)
+    const contactId = insertData[0]?.id
 
-    // Send admin alert
-    await sendAdminAlert(formType, name, email, validated)
+    if (!contactId) {
+      throw new Error('No contact ID returned')
+    }
+
+    // Insert into submissions table
+    const submissionResponse = await fetch(`${supabaseUrl}/rest/v1/submissions`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${serviceRoleKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contact_id: contactId,
+        form_type: formType,
+        form_data: { email, name: contactName_resolved, ...rest },
+        ip_address: req.headers.get('x-forwarded-for') || 'unknown',
+        user_agent: req.headers.get('user-agent') || '',
+        source_url: req.headers.get('referer') || '',
+      }),
+    })
+
+    if (!submissionResponse.ok) {
+      const error = await submissionResponse.json()
+      console.error('Submission failed:', error)
+      throw new Error(error.message || 'Failed to store submission')
+    }
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Thank you for your submission. Check your email for confirmation.',
+        message: 'Thank you for your submission!',
       },
       { status: 200 }
     )
   } catch (error: any) {
-    console.error('Form submission error:', error)
-
-    // Return validation error details if from Zod
-    if (error.name === 'ZodError') {
-      return NextResponse.json(
-        {
-          error: 'Validation failed',
-          details: error.errors,
-        },
-        { status: 400 }
-      )
-    }
-
+    console.error('Error:', error)
     return NextResponse.json(
-      { error: error?.message || 'Something went wrong. Please try again.' },
+      { error: error?.message || 'Something went wrong' },
       { status: 500 }
     )
   }
-}
-
-function mapFormTypeToContactType(formType: string): string {
-  const mapping: Record<string, string> = {
-    waitlist: 'general_user',
-    newsroom: 'newsroom',
-    partner: 'partner',
-    contributor: 'contributor',
-    contact: 'general_user',
-  }
-  return mapping[formType] || 'general_user'
 }
