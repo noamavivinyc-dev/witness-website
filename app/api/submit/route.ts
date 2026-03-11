@@ -8,18 +8,26 @@ export async function POST(req: NextRequest) {
     // Determine the name from whichever field is populated
     const contactName_resolved = name || contactName || organizationName || 'Unknown'
 
-    // Call Supabase REST API directly with service role key
+    // Get credentials from environment
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
     if (!supabaseUrl || !serviceRoleKey) {
+      console.error('Missing env:', { supabaseUrl: !!supabaseUrl, serviceRoleKey: !!serviceRoleKey })
       return NextResponse.json({ error: 'Server config error' }, { status: 500 })
     }
 
+    console.log('Using Supabase URL:', supabaseUrl)
+    console.log('Service role key present:', !!serviceRoleKey)
+
     // Insert into contacts table via REST API
-    const insertResponse = await fetch(`${supabaseUrl}/rest/v1/contacts`, {
+    const insertUrl = `${supabaseUrl}/rest/v1/contacts`
+    console.log('Inserting to:', insertUrl)
+
+    const insertResponse = await fetch(insertUrl, {
       method: 'POST',
       headers: {
+        'apikey': serviceRoleKey,
         'Authorization': `Bearer ${serviceRoleKey}`,
         'Content-Type': 'application/json',
         'Prefer': 'return=representation',
@@ -32,23 +40,28 @@ export async function POST(req: NextRequest) {
       }),
     })
 
+    console.log('Insert response status:', insertResponse.status)
     const insertData = await insertResponse.json()
+    console.log('Insert response:', insertData)
 
     if (!insertResponse.ok) {
-      console.error('Insert failed:', insertData)
-      throw new Error(insertData.message || 'Failed to insert contact')
+      throw new Error(insertData.message || `Insert failed: ${insertResponse.status}`)
     }
 
     const contactId = insertData[0]?.id
 
     if (!contactId) {
-      throw new Error('No contact ID returned')
+      throw new Error('No contact ID returned from insert')
     }
 
+    console.log('Created contact:', contactId)
+
     // Insert into submissions table
-    const submissionResponse = await fetch(`${supabaseUrl}/rest/v1/submissions`, {
+    const submissionUrl = `${supabaseUrl}/rest/v1/submissions`
+    const submissionResponse = await fetch(submissionUrl, {
       method: 'POST',
       headers: {
+        'apikey': serviceRoleKey,
         'Authorization': `Bearer ${serviceRoleKey}`,
         'Content-Type': 'application/json',
       },
@@ -62,10 +75,12 @@ export async function POST(req: NextRequest) {
       }),
     })
 
+    console.log('Submission response status:', submissionResponse.status)
+    const submissionData = await submissionResponse.json()
+    console.log('Submission response:', submissionData)
+
     if (!submissionResponse.ok) {
-      const error = await submissionResponse.json()
-      console.error('Submission failed:', error)
-      throw new Error(error.message || 'Failed to store submission')
+      throw new Error(submissionData.message || `Submission failed: ${submissionResponse.status}`)
     }
 
     return NextResponse.json(
@@ -76,7 +91,7 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     )
   } catch (error: any) {
-    console.error('Error:', error)
+    console.error('Form submission error:', error.message)
     return NextResponse.json(
       { error: error?.message || 'Something went wrong' },
       { status: 500 }
