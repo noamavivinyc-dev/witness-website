@@ -5,10 +5,8 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { formType, email, name, contactName, organizationName, ...rest } = body
 
-    // Determine the name from whichever field is populated
     const contactName_resolved = name || contactName || organizationName || 'Unknown'
 
-    // Get credentials from environment
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
@@ -17,54 +15,82 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Server config error' }, { status: 500 })
     }
 
-    console.log('Using Supabase URL:', supabaseUrl)
-    console.log('Service role key present:', !!serviceRoleKey)
+    const headers = {
+      'apikey': serviceRoleKey,
+      'Authorization': `Bearer ${serviceRoleKey}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+    }
 
-    // Insert into contacts table via REST API
-    const insertUrl = `${supabaseUrl}/rest/v1/contacts`
-    console.log('Inserting to:', insertUrl)
+    const contactType = formType === 'newsroom' ? 'newsroom' : 'general_user'
 
-    const insertResponse = await fetch(insertUrl, {
+    // Step 1: Try to insert the contact
+    const insertResponse = await fetch(`${supabaseUrl}/rest/v1/contacts`, {
       method: 'POST',
-      headers: {
-        'apikey': serviceRoleKey,
-        'Authorization': `Bearer ${serviceRoleKey}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation',
-      },
+      headers,
       body: JSON.stringify({
         email,
         name: contactName_resolved,
-        contact_type: formType === 'newsroom' ? 'newsroom' : 'general_user',
+        contact_type: contactType,
         last_submission_at: new Date().toISOString(),
       }),
     })
 
-    console.log('Insert response status:', insertResponse.status)
-    const insertData = await insertResponse.json()
-    console.log('Insert response:', insertData)
+    let contactId: string
 
-    if (!insertResponse.ok) {
-      throw new Error(insertData.message || `Insert failed: ${insertResponse.status}`)
+    if (insertResponse.ok) {
+      const insertData = await insertResponse.json()
+      contactId = insertData[0]?.id
+      if (!contactId) {
+        throw new Error('No contact ID returned from insert')
+      }
+    } else {
+      const insertError = await insertResponse.json()
+
+      // Duplicate email (23505) — update existing and get its id
+      if (insertError.code === '23505') {
+        const updateResponse = await fetch(
+          `${supabaseUrl}/rest/v1/contacts?email=eq.${encodeURIComponent(email)}`,
+          {
+            method: 'PATCH',
+            headers,
+            body: JSON.stringify({
+              name: contactName_resolved,
+              contact_type: contactType,
+              last_submission_at: new Date().toISOString(),
+            }),
+          }
+        )
+
+        if (!updateResponse.ok) {
+          const updateError = await updateResponse.json()
+          throw new Error(`Failed to update contact: ${updateError.message}`)
+        }
+
+        const updatedData = await updateResponse.json()
+        contactId = updatedData[0]?.id
+
+        if (!contactId) {
+          // Fallback: fetch the contact id directly
+          const getResponse = await fetch(
+            `${supabaseUrl}/rest/v1/contacts?email=eq.${encodeURIComponent(email)}&select=id`,
+            { headers }
+          )
+          const getData = await getResponse.json()
+          contactId = getData[0]?.id
+          if (!contactId) {
+            throw new Error('Could not find or create contact')
+          }
+        }
+      } else {
+        throw new Error(insertError.message || `Insert failed: ${insertResponse.status}`)
+      }
     }
 
-    const contactId = insertData[0]?.id
-
-    if (!contactId) {
-      throw new Error('No contact ID returned from insert')
-    }
-
-    console.log('Created contact:', contactId)
-
-    // Insert into submissions table
-    const submissionUrl = `${supabaseUrl}/rest/v1/submissions`
-    const submissionResponse = await fetch(submissionUrl, {
+    // Step 2: Store submission
+    const submissionResponse = await fetch(`${supabaseUrl}/rest/v1/submissions`, {
       method: 'POST',
-      headers: {
-        'apikey': serviceRoleKey,
-        'Authorization': `Bearer ${serviceRoleKey}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { ...headers, 'Prefer': 'return=minimal' },
       body: JSON.stringify({
         contact_id: contactId,
         form_type: formType,
@@ -75,19 +101,12 @@ export async function POST(req: NextRequest) {
       }),
     })
 
-    console.log('Submission response status:', submissionResponse.status)
-    const submissionData = await submissionResponse.json()
-    console.log('Submission response:', submissionData)
-
     if (!submissionResponse.ok) {
-      throw new Error(submissionData.message || `Submission failed: ${submissionResponse.status}`)
+      console.error('Submission insert failed:', await submissionResponse.text())
     }
 
     return NextResponse.json(
-      {
-        success: true,
-        message: 'Thank you for your submission!',
-      },
+      { success: true, message: 'Thank you for your submission!' },
       { status: 200 }
     )
   } catch (error: any) {
