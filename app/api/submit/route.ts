@@ -8,16 +8,6 @@ import {
   contactSchema,
 } from '@/lib/schemas'
 
-// Create service role client directly (can write to protected tables)
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing Supabase credentials in environment')
-}
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey)
-
 const schemas: Record<string, any> = {
   waitlist: waitlistSchema,
   newsroom: newsroomSchema,
@@ -27,6 +17,21 @@ const schemas: Record<string, any> = {
 
 export async function POST(req: NextRequest) {
   try {
+    // Check credentials INSIDE the function, not at import time
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing env vars:', { supabaseUrl: !!supabaseUrl, supabaseServiceKey: !!supabaseServiceKey })
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      )
+    }
+
+    // Create client with service role key
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
     const body = await req.json()
     const { formType, ...formData } = body
 
