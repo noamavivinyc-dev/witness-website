@@ -32,7 +32,7 @@ SELECT * FROM email_logs;
 - [ ] Add the DNS records Resend shows you to your domain registrar
 - [ ] Return to Resend and click **Verify** once DNS propagates (10 min)
 
-**Your Resend API Key:** `re_dzqeQTve_JyZ1gX9JDZsmjkNjZ4DZY8by`
+**Your Resend API Key:** `[stored in .env.local - never commit to git]`
 
 ---
 
@@ -72,11 +72,11 @@ vercel --prod
 2. Go to **Settings** → **Environment Variables**
 3. Add these:
    ```
-   NEXT_PUBLIC_SUPABASE_URL = https://mdowgalvrqyhsekibzbe.supabase.co
-   SUPABASE_SERVICE_ROLE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1kb3dnYWx2cnF5aHNla2liemJlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjYxNDI4NSwiZXhwIjoyMDg4MTkwMjg1fQ.qqK2KRzQjGmC0asEvvYPLtjMU5aD8nENwWmMcBN8Yk0
-   RESEND_API_KEY = re_dzqeQTve_JyZ1gX9JDZsmjkNjZ4DZY8by
-   ADMIN_EMAIL_1 = noam@thewitnessapp.com
-   ADMIN_EMAIL_2 = contact@thewitnessapp.com
+   NEXT_PUBLIC_SUPABASE_URL = [your Supabase project URL]
+   SUPABASE_SERVICE_ROLE_KEY = [your service role key from Supabase dashboard]
+   RESEND_API_KEY = [your Resend API key]
+   ADMIN_EMAIL_1 = [admin email 1]
+   ADMIN_EMAIL_2 = [admin email 2]
    NEXT_PUBLIC_SITE_URL = https://thewitnessapp.com
    ```
 4. Click **Save**
