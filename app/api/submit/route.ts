@@ -33,18 +33,18 @@ export async function POST(req: NextRequest) {
     const email = validated.email
     const name = validated.name || validated.contactName || validated.organizationName
 
-    // Check if contact exists
-    let contact = await supabase
+    // Check if contact exists - use maybeSingle() instead of single()
+    const { data: existingContact, error: selectError } = await supabase
       .from('contacts')
       .select('id, contact_type')
       .eq('email', email)
-      .single()
+      .maybeSingle()
 
     let contactId: string
 
-    if (contact.data) {
+    if (existingContact?.id) {
       // Update existing contact
-      contactId = contact.data.id
+      contactId = existingContact.id
       await supabase
         .from('contacts')
         .update({
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
         .eq('id', contactId)
     } else {
       // Create new contact
-      const insertResult = await supabase
+      const { data: newContact, error: insertError } = await supabase
         .from('contacts')
         .insert({
           email,
@@ -66,11 +66,11 @@ export async function POST(req: NextRequest) {
         .select('id')
         .single()
 
-      if (insertResult.error) {
-        throw new Error(`Failed to create contact: ${insertResult.error.message}`)
+      if (insertError) {
+        throw new Error(`Failed to create contact: ${insertError.message}`)
       }
 
-      contactId = insertResult.data.id
+      contactId = newContact!.id
     }
 
     // Store submission
@@ -79,8 +79,8 @@ export async function POST(req: NextRequest) {
       form_type: formType,
       form_data: validated,
       ip_address: req.headers.get('x-forwarded-for') || 'unknown',
-      user_agent: req.headers.get('user-agent'),
-      source_url: req.headers.get('referer'),
+      user_agent: req.headers.get('user-agent') || '',
+      source_url: req.headers.get('referer') || '',
     })
 
     // Send confirmation email to user
@@ -111,7 +111,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: 'Something went wrong. Please try again.' },
+      { error: error?.message || 'Something went wrong. Please try again.' },
       { status: 500 }
     )
   }
