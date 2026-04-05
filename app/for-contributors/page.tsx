@@ -95,7 +95,7 @@ export default function ForContributorsPage() {
         <h2 className="font-display text-3xl md:text-4xl font-[800] tracking-tight text-[#2C2820] mb-10 leading-[1.05]">
           How your score moves.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
+        <div className="two-up-grid grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[
             { event: 'Report corroborated by another user', delta: '+5', positive: true },
             { event: 'Admin manually verifies your report', delta: '+3', positive: true },

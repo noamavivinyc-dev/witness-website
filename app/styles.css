@@ -317,9 +317,21 @@ body {
   color: var(--ink);
 }
 
-.manifesto-quote .outline {
-  -webkit-text-stroke: 1.5px var(--ink);
-  color: transparent;
+.manifesto-highlight {
+  color: var(--signal);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .manifesto-highlight {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 768px) {
+  .two-up-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
 .manifesto-text p {

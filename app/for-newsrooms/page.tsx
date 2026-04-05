@@ -92,7 +92,7 @@ export default function ForNewsroomsPage() {
         <h2 className="font-display text-3xl md:text-4xl font-[800] tracking-tight text-[#2C2820] mb-10 leading-[1.05]">
           Built for how<br />newsrooms actually work.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
+        <div className="two-up-grid grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[
             { title: 'Breaking News Desks', desc: 'Monitor global events in real-time. Get alerts for your regions. Access eyewitness content before wire services.' },
             { title: 'Investigative Teams', desc: 'Track ongoing events over time. Access historical data and reporter networks. Build stories from multiple corroborated sources.' },

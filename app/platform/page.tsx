@@ -46,7 +46,7 @@ export default function PlatformPage() {
             ))}
           </div>
         </div>
-        <div className="relative bg-[#2E2B26] min-h-[350px] overflow-hidden">
+        <div className="relative bg-[#2E2B26] min-h-[350px] overflow-hidden border-t lg:border-t-0 border-[#CEC9BC]">
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="mapgrid1" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -85,7 +85,7 @@ export default function PlatformPage() {
 
       {/* Layer 2 - Citizen Reporting */}
       <section className="grid grid-cols-1 lg:grid-cols-2 border-b border-[#CEC9BC]">
-        <div className="relative bg-[#EAE6DE] min-h-[350px] overflow-hidden flex items-center justify-center order-2 lg:order-1">
+        <div className="relative bg-[#EAE6DE] min-h-[350px] overflow-hidden flex items-center justify-center order-2 lg:order-1 border-t lg:border-t-0 border-[#CEC9BC]">
           <div className="p-8 space-y-3 w-full max-w-sm">
             <div className="bg-[#F2EFE9] border border-[#CEC9BC] p-4">
               <div className="flex items-center gap-2 mb-2">
@@ -135,7 +135,7 @@ export default function PlatformPage() {
             Posts can be linked to map reports, creating a bidirectional connection between geographic events and social discourse.
           </p>
         </div>
-        <div className="relative bg-[#EAE6DE] min-h-[350px] overflow-hidden flex items-center justify-center">
+        <div className="relative bg-[#EAE6DE] min-h-[350px] overflow-hidden flex items-center justify-center border-t lg:border-t-0 border-[#CEC9BC]">
           <div className="p-8 space-y-2 w-full max-w-sm">
             {[
               { user: '@sarah_k', text: 'Massive crowd forming at Freedom Square. Estimated 15k+ people.', time: '3m', likes: 42 },
@@ -158,7 +158,7 @@ export default function PlatformPage() {
 
       {/* Layer 4 - Public Discourse */}
       <section className="grid grid-cols-1 lg:grid-cols-2 border-b border-[#CEC9BC]">
-        <div className="relative bg-[#2E2B26] min-h-[350px] overflow-hidden flex items-center justify-center order-2 lg:order-1">
+        <div className="relative bg-[#2E2B26] min-h-[350px] overflow-hidden flex items-center justify-center order-2 lg:order-1 border-t lg:border-t-0 border-[#CEC9BC]">
           <div className="p-8 w-full max-w-sm">
             <div className="border border-[rgba(255,255,255,0.1)] p-4 mb-3">
               <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#E8440A] mb-2">Event Thread</div>

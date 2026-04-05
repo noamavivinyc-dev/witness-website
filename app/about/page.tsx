@@ -31,10 +31,10 @@ export default function AboutPage() {
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-[800] leading-[1.05] tracking-tight text-[#2C2820] mb-0">
             History is<br />
-            happening <span style={{ WebkitTextStroke: '1.5px #2C2820', color: 'transparent' }}>now.</span><br />
+            happening <span className="manifesto-highlight">now.</span><br />
           </h2>
         </div>
-        <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center border-l border-[#CEC9BC]">
+        <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-[#CEC9BC]">
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light mb-5">
             Modern history is no longer written years later by institutions. It is recorded live, by millions of people everywhere. But today that record is fragmented, shaped by algorithms, filtered by editors, and monetized by intermediaries, not the people who created it.
           </p>
@@ -56,7 +56,7 @@ export default function AboutPage() {
         <h2 className="font-display text-3xl md:text-4xl font-[800] tracking-tight text-[#2C2820] mb-10 leading-[1.05]">
           Four failures.<br />One platform that fixes them.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
+        <div className="two-up-grid grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[
             { num: '01', title: 'Speed', desc: 'Traditional media is too slow. By the time a story is verified and published, the world has moved on. Witness shows events as they unfold.' },
             { num: '02', title: 'Access', desc: 'Editorial gatekeeping limits who can report. Witness is open to anyone with a phone and a story. Credibility is earned, not granted.' },
@@ -81,7 +81,7 @@ export default function AboutPage() {
         <h2 className="font-display text-3xl md:text-4xl font-[800] tracking-tight text-[#2C2820] mb-10 leading-[1.05]">
           Non-negotiable.<br />Every feature answers to these.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
+        <div className="two-up-grid grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[
             { num: '01', title: 'Reality First', desc: 'The map and report come before narrative. Information is organized by where and when, not by engagement.' },
             { num: '02', title: 'Credibility is Earned', desc: 'No automatic trust. Credibility is a dynamic score from accuracy history, corroboration, and community signals.' },

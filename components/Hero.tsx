@@ -76,7 +76,7 @@ export default function Hero() {
       </div>
 
       {/* Right side - Animated Map */}
-      <div className="relative overflow-hidden bg-[#EAE6DE] min-h-[400px] lg:min-h-0">
+      <div className="relative overflow-hidden bg-[#EAE6DE] min-h-[400px] lg:min-h-0 border-t lg:border-t-0 border-[#CEC9BC]">
         <svg
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 800 500"

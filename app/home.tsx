@@ -133,12 +133,12 @@ export default function HomePage() {
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-[800] leading-[1.05] tracking-tight text-[#2C2820]">
             History is<br />
-            happening <span style={{ WebkitTextStroke: '1.5px #2C2820', color: 'transparent' }}>now.</span><br />
+            happening <span className="manifesto-highlight">now.</span><br />
             The world<br />
             deserves witnesses.
           </h2>
         </div>
-        <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center lg:border-l border-[#CEC9BC]">
+        <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-[#CEC9BC]">
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light mb-5">
             Modern history is no longer written years later by institutions. It is recorded live, by millions of people everywhere. But today that record is fragmented, shaped by algorithms, filtered by editors, and monetized by intermediaries.
           </p>
@@ -190,7 +190,7 @@ export default function HomePage() {
         <p className="text-[15px] leading-[1.8] text-[#4A453F] max-w-3xl font-light mb-10">
           For contributors, newsrooms, and anyone evaluating a new information layer, these are the questions that matter most.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
+        <div className="two-up-grid grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {homeFaqs.map((faq) => (
             <div key={faq.question} className="bg-[#F2EFE9] p-7 hover:bg-[#EAE6DE] transition-colors">
               <h3 className="font-display text-xl font-[700] text-[#2C2820] mb-3 leading-[1.2]">
