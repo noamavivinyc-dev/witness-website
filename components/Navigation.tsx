@@ -19,7 +19,7 @@ export default function Navigation({ onCTA }: { onCTA: () => void }) {
       <div className="flex justify-between items-center px-8 md:px-12 h-16">
         {/* Logo - much larger */}
         <Link href="/" className="flex items-center gap-2 no-underline">
-          <span className="font-display text-2xl md:text-3xl font-[800] tracking-tight text-[#2C2820] leading-none">
+          <span className="font-brand text-2xl md:text-3xl font-[800] tracking-tight text-[#2C2820] leading-none">
             W<span className="text-[#E8440A]">·</span>itness
           </span>
         </Link>

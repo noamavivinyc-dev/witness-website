@@ -18,7 +18,7 @@ export default function TrustAndSafetyPage() {
           Truth through<br />transparency.
         </h1>
         <p className="text-base leading-relaxed text-[#4A453F] max-w-2xl font-light">
-          Witness doesn&apos;t decide what&apos;s true. The community does — through corroboration, transparent trust scores, and visible debate. Here&apos;s how the system works.
+          Witness doesn&apos;t decide what&apos;s true. The community does, through corroboration, transparent trust scores, and visible debate. Here&apos;s how the system works.
         </p>
       </section>
 
@@ -85,7 +85,7 @@ export default function TrustAndSafetyPage() {
               { step: '02', title: 'Community Corroboration', desc: 'Other users in the area can corroborate the report. Each corroboration increases the report\'s trust signal.' },
               { step: '03', title: 'Trust Threshold', desc: 'At 10+ corroborations from distinct users, the report automatically moves to "corroborated" tier. The original reporter earns +5 trust score.' },
               { step: '04', title: 'Flagging & Dispute', desc: 'If 5+ distinct users flag a report, it\'s automatically marked "disputed". Context from both sides is visible. Admins review the queue.' },
-              { step: '05', title: 'Admin Review', desc: 'Admins can verify reports independently, dismiss flags, or take action. All moderation is transparent — never silent deletion.' },
+              { step: '05', title: 'Admin Review', desc: 'Admins can verify reports independently, dismiss flags, or take action. All moderation is transparent, never silent deletion.' },
             ].map((item) => (
               <div key={item.step} className="flex gap-6 py-6 border-b border-[#CEC9BC] last:border-b-0">
                 <div className="font-display text-3xl font-[800] text-[#DEDAD1] flex-shrink-0 w-12">{item.step}</div>
@@ -118,10 +118,10 @@ export default function TrustAndSafetyPage() {
             <div className="h-full bg-[#E8440A]" style={{ width: '25%' }}></div>
           </div>
           <div className="flex justify-between mt-2">
-            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#8A857D]">0 — New</span>
-            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#2B5CE6]">20 — Reporter</span>
-            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#0F8C44]">50 — Trusted</span>
-            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#E8440A]">75 — Verified</span>
+            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#8A857D]">0 - New</span>
+            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#2B5CE6]">20 - Reporter</span>
+            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#0F8C44]">50 - Trusted</span>
+            <span className="font-mono text-[8px] tracking-[0.1em] uppercase text-[#E8440A]">75 - Verified</span>
           </div>
         </div>
 
@@ -155,7 +155,7 @@ export default function TrustAndSafetyPage() {
           {[
             { title: 'No Silent Deletion', desc: 'Content is never quietly removed. Disputed content is flagged with visible context. Users see why something is disputed.' },
             { title: 'Soft Delete Only', desc: 'Even when content is removed, the record exists. No hard deletes. Transparency in every action.' },
-            { title: 'Community First', desc: 'The community flags and corroborates. Admins review. Algorithms never decide what you see — chronological feeds only.' },
+            { title: 'Community First', desc: 'The community flags and corroborates. Admins review. Algorithms never decide what you see. Chronological feeds only.' },
             { title: 'Reporter Safety', desc: 'GPS coordinates are never shown publicly. Only reverse-geocoded location names. Identity modes protect contributors.' },
             { title: 'No Facial Recognition', desc: 'Ever. Under any circumstances. This is a non-negotiable principle of the platform.' },
             { title: 'Accountable Identity', desc: 'No truly anonymous posting. Identity modes provide privacy while maintaining internal accountability.' },

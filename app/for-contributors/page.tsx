@@ -18,7 +18,7 @@ export default function ForContributorsPage() {
           Report. Build trust.<br />Get paid.
         </h1>
         <p className="text-base leading-relaxed text-[#4A453F] max-w-2xl font-light">
-          Whether you&apos;re a journalist, OSINT analyst, or eyewitness — Witness gives you the tools to report what you see, build a verified reputation, and earn from your content.
+          Whether you&apos;re a journalist, OSINT analyst, or eyewitness, Witness gives you the tools to report what you see, build a verified reputation, and earn from your content.
         </p>
       </section>
 

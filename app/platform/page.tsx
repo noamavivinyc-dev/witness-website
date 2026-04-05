@@ -118,7 +118,7 @@ export default function PlatformPage() {
             Anyone can submit geotagged reports tied to their location. Reports appear on the map instantly, tagged by category and trust tier. Credibility is earned through accuracy and community corroboration.
           </p>
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light">
-            Each report starts as &quot;unverified&quot; and moves through trust tiers as other witnesses corroborate the event. No editorial gatekeeping — the community determines truth.
+            Each report starts as &quot;unverified&quot; and moves through trust tiers as other witnesses corroborate the event. No editorial gatekeeping. The community determines truth.
           </p>
         </div>
       </section>
@@ -129,7 +129,7 @@ export default function PlatformPage() {
           <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#8A857D] mb-4">Layer 03</div>
           <h2 className="font-display text-3xl md:text-4xl font-[800] tracking-tight text-[#2C2820] mb-5 leading-[1.05]">Short-Form Feed</h2>
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light mb-4">
-            A Twitter-style forum feed anchored to real-world events. On-the-ground clips, commentary, and analysis — all chronologically sorted, never algorithmically ranked.
+            A Twitter-style forum feed anchored to real-world events. On-the-ground clips, commentary, and analysis, all chronologically sorted and never algorithmically ranked.
           </p>
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light">
             Posts can be linked to map reports, creating a bidirectional connection between geographic events and social discourse.
@@ -162,7 +162,7 @@ export default function PlatformPage() {
           <div className="p-8 w-full max-w-sm">
             <div className="border border-[rgba(255,255,255,0.1)] p-4 mb-3">
               <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#E8440A] mb-2">Event Thread</div>
-              <div className="font-display text-[16px] font-[700] text-[#F2EFE9] mb-2">Tbilisi Protests — Day 3</div>
+              <div className="font-display text-[16px] font-[700] text-[#F2EFE9] mb-2">Tbilisi Protests: Day 3</div>
               <div className="text-[12px] text-[rgba(242,239,233,0.6)] font-light mb-3">47 reports · 312 posts · 1.2k participants</div>
               <div className="space-y-2">
                 <div className="border-l-2 border-[#0F8C44] pl-3 py-1">
@@ -181,10 +181,10 @@ export default function PlatformPage() {
           <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#8A857D] mb-4">Layer 04</div>
           <h2 className="font-display text-3xl md:text-4xl font-[800] tracking-tight text-[#2C2820] mb-5 leading-[1.05]">Public Discourse</h2>
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light mb-4">
-            Every event anchors a conversation. Users debate, add context, and challenge reports openly. Truth emerges through visible argument — not suppression or algorithmic filtering.
+            Every event anchors a conversation. Users debate, add context, and challenge reports openly. Truth emerges through visible argument, not suppression or algorithmic filtering.
           </p>
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light">
-            Verified claims are highlighted. Disputed information is flagged with context. The community sees the full picture — including disagreements.
+            Verified claims are highlighted. Disputed information is flagged with context. The community sees the full picture, including disagreements.
           </p>
         </div>
       </section>

@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="px-8 md:px-12 py-12 grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-[rgba(255,255,255,0.08)]">
         <div>
           <Link href="/" className="no-underline">
-            <span className="font-display text-2xl font-[800] tracking-tight text-[#F2EFE9]">
+            <span className="font-brand text-2xl font-[800] tracking-tight text-[#F2EFE9]">
               W<span className="text-[#E8440A]">·</span>itness
             </span>
           </Link>

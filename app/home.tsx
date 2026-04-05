@@ -74,7 +74,7 @@ export default function HomePage() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[
-            { num: '01', title: 'Speed', desc: 'Traditional media is too slow. Events happen in real-time — reporting should too.' },
+            { num: '01', title: 'Speed', desc: 'Traditional media is too slow. Events happen in real-time. Reporting should too.' },
             { num: '02', title: 'Access', desc: 'Editorial gatekeeping limits who can report. Anyone with a phone should be heard.' },
             { num: '03', title: 'Context', desc: 'Social media fragments information. Reports need location, time, and structure.' },
             { num: '04', title: 'Trust', desc: 'Algorithms optimize for engagement, not truth. Credibility should be earned.' },
@@ -88,7 +88,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Platform Overview — 4 Layers */}
+      {/* Platform Overview - 4 Layers */}
       <section className="p-8 md:p-12 lg:p-16 border-b border-[#CEC9BC]">
         <div className="flex items-center gap-2 mb-6 font-mono text-[10px] tracking-[0.2em] uppercase text-[#E8440A]">
           <span className="w-5 h-px bg-[#E8440A]"></span>
@@ -98,7 +98,7 @@ export default function HomePage() {
           Four layers.<br />One coherent system.
         </h2>
         <p className="text-[15px] leading-[1.8] text-[#4A453F] max-w-2xl font-light mb-10">
-          A live map, citizen reporting, a real-time feed, and structured public discourse — unified in one platform.
+          A live map, citizen reporting, a real-time feed, and structured public discourse, unified in one platform.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[

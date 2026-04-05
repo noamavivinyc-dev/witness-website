@@ -21,7 +21,8 @@
   --dark2: #3D3930;
   --dark3: #524E47;
   --sans: 'Inter', sans-serif;
-  --display: 'Space Grotesk', sans-serif;
+  --display: 'Sora', sans-serif;
+  --brand: 'Syne', sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
 
@@ -213,7 +214,7 @@ body {
 }
 
 .vs-list li::before {
-  content: '—';
+  content: '-';
   color: var(--rule);
   flex-shrink: 0;
 }

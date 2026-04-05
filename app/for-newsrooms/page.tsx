@@ -18,7 +18,7 @@ export default function ForNewsroomsPage() {
           Verified eyewitness<br />content, licensed.
         </h1>
         <p className="text-base leading-relaxed text-[#4A453F] max-w-2xl font-light">
-          Access real-time, geotagged reports from the ground. License verified content through a transparent marketplace. Get the story before anyone else — directly from the people who are there.
+          Access real-time, geotagged reports from the ground. License verified content through a transparent marketplace. Get the story before anyone else, directly from the people who are there.
         </p>
       </section>
 

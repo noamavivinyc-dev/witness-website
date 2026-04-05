@@ -18,7 +18,7 @@ export default function AboutPage() {
           The world deserves<br />witnesses.
         </h1>
         <p className="text-base leading-relaxed text-[#4A453F] max-w-2xl font-light">
-          Witness is a real-time, map-based citizen journalism platform. Anyone reports what they see. The world watches it unfold. The truth emerges through transparency — not editorial authority.
+          Witness is a real-time, map-based citizen journalism platform. Anyone reports what they see. The world watches it unfold. The truth emerges through transparency, not editorial authority.
         </p>
       </section>
 
@@ -36,7 +36,7 @@ export default function AboutPage() {
         </div>
         <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center border-l border-[#CEC9BC]">
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light mb-5">
-            Modern history is no longer written years later by institutions. It is recorded live, by millions of people everywhere. But today that record is fragmented, shaped by algorithms, filtered by editors, and monetized by intermediaries — not the people who created it.
+            Modern history is no longer written years later by institutions. It is recorded live, by millions of people everywhere. But today that record is fragmented, shaped by algorithms, filtered by editors, and monetized by intermediaries, not the people who created it.
           </p>
           <p className="text-[15px] leading-[1.8] text-[#4A453F] font-light mb-6">
             Witness exists to fix that. A live public record of the present. A social platform grounded in reality. A marketplace for authentic information. A system where the world explains itself to itself.
@@ -59,9 +59,9 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[
             { num: '01', title: 'Speed', desc: 'Traditional media is too slow. By the time a story is verified and published, the world has moved on. Witness shows events as they unfold.' },
-            { num: '02', title: 'Access', desc: 'Editorial gatekeeping limits who can report. Witness is open to anyone with a phone and a story — credibility is earned, not granted.' },
-            { num: '03', title: 'Context', desc: 'Social media fragments information. Witness anchors every report to a location, time, and event thread — creating structured context.' },
-            { num: '04', title: 'Trust', desc: 'Algorithms optimize for engagement, not truth. Witness uses community corroboration and transparent trust scores — no hidden ranking.' },
+            { num: '02', title: 'Access', desc: 'Editorial gatekeeping limits who can report. Witness is open to anyone with a phone and a story. Credibility is earned, not granted.' },
+            { num: '03', title: 'Context', desc: 'Social media fragments information. Witness anchors every report to a location, time, and event thread. That creates structured context.' },
+            { num: '04', title: 'Trust', desc: 'Algorithms optimize for engagement, not truth. Witness uses community corroboration and transparent trust scores. There is no hidden ranking.' },
           ].map(item => (
             <div key={item.num} className="bg-[#F2EFE9] p-8 hover:bg-[#EAE6DE] transition-colors">
               <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#E8440A] mb-3">{item.num}</div>
@@ -83,11 +83,11 @@ export default function AboutPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
           {[
-            { num: '01', title: 'Reality First', desc: 'The map and report come before narrative. Information organized by where and when — not by engagement.' },
+            { num: '01', title: 'Reality First', desc: 'The map and report come before narrative. Information is organized by where and when, not by engagement.' },
             { num: '02', title: 'Credibility is Earned', desc: 'No automatic trust. Credibility is a dynamic score from accuracy history, corroboration, and community signals.' },
             { num: '03', title: 'Transparency Over Suppression', desc: "We don't quietly erase falsehoods. Context is attached visibly. Users see the debate." },
             { num: '04', title: 'The Map is the Product', desc: 'Every feature must improve the map or feed it. The app is the interface around the map.' },
-            { num: '05', title: 'Incentives Align with Truth', desc: 'Monetization rewards accuracy and proximity to events — not virality or sensationalism.' },
+            { num: '05', title: 'Incentives Align with Truth', desc: 'Monetization rewards accuracy and proximity to events, not virality or sensationalism.' },
             { num: '06', title: 'Global by Default', desc: 'Built for authoritarian environments, conflict zones, and limited connectivity from day one.' },
           ].map(item => (
             <div key={item.num} className="bg-[#F2EFE9] p-7 hover:bg-[#EAE6DE] transition-colors">
@@ -110,11 +110,11 @@ export default function AboutPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            'Not a fact-checker — we create conditions for the community to determine truth',
-            'Not a social media platform — social features serve reporting, not engagement',
-            'Not a news aggregator — no scraping, users report directly',
-            'Not engagement-ranked — all feeds are chronological only, always',
-            'No facial recognition — ever, under any circumstances',
+            'Not a fact-checker. We create conditions for the community to determine truth',
+            'Not a social media platform. Social features serve reporting, not engagement',
+            'Not a news aggregator. No scraping, users report directly',
+            'Not engagement-ranked. All feeds are chronological only, always',
+            'No facial recognition, ever, under any circumstances',
             'No paid placement in credibility or trust systems',
           ].map((item, i) => (
             <div key={i} className="border border-[rgba(255,255,255,0.08)] p-5">

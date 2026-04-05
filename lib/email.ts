@@ -30,7 +30,7 @@ export async function sendConfirmationEmail(email: string, formType: string) {
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #2C2820; margin-bottom: 16px;">History is happening now.</h2>
           <p style="color: #4A453F; line-height: 1.6; margin-bottom: 16px;">${escapeHtml(message)}</p>
-          <p style="color: #8A857D; font-size: 14px;">— The Witness Team</p>
+          <p style="color: #8A857D; font-size: 14px;">- The Witness Team</p>
           <hr style="border: none; border-top: 1px solid #CEC9BC; margin: 32px 0;" />
           <p style="color: #8A857D; font-size: 12px;">
             Don't want emails from Witness? <a href="${siteConfig.url}/unsubscribe" style="color: #E8440A;">Unsubscribe</a>

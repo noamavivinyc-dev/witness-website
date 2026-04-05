@@ -18,7 +18,7 @@ export default function PricingPage() {
           Revenue that aligns<br />with the mission.
         </h1>
         <p className="text-base leading-relaxed text-[#4A453F] max-w-2xl font-light">
-          Witness is free for users. Revenue comes from content licensing, creator subscriptions, transparent advertising, and institutional data products — never from compromising truth.
+          Witness is free for users. Revenue comes from content licensing, creator subscriptions, transparent advertising, and institutional data products, never from compromising truth.
         </p>
       </section>
 
@@ -85,7 +85,7 @@ export default function PricingPage() {
           {[
             { label: 'Content Licensing', creator: '70%', platform: '30%', bar: 70 },
             { label: 'Subscriptions', creator: '80%', platform: '20%', bar: 80 },
-            { label: 'Reputation & Trust', creator: '100%', platform: '—', bar: 100 },
+            { label: 'Reputation & Trust', creator: '100%', platform: 'N/A', bar: 100 },
           ].map(item => (
             <div key={item.label} className="bg-[#F2EFE9] p-7">
               <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#8A857D] mb-3">{item.label}</div>
@@ -113,7 +113,7 @@ export default function PricingPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
           {[
             'No paid placement in trust or credibility systems',
-            'No political advertising — ever',
+            'No political advertising, ever',
             'No algorithmic boosting for paid content',
             'No selling user data or behavioral profiles',
             'No engagement-maximizing feed manipulation',
