@@ -10,6 +10,7 @@ import NewsroomForm from '@/components/forms/NewsroomForm'
 import ContactForm from '@/components/forms/ContactForm'
 import Footer from '@/components/Footer'
 import FormModal from '@/components/FormModal'
+import { homeFaqs } from '@/lib/seo'
 
 export default function HomePage() {
   const [activeModal, setActiveModal] = useState<string | null>(null)
@@ -19,6 +20,45 @@ export default function HomePage() {
       <Navigation onCTA={() => setActiveModal('waitlist')} />
       <Hero />
       <Ticker />
+
+      {/* Direct Answer */}
+      <section className="p-8 md:p-12 lg:p-16 border-b border-[#CEC9BC]">
+        <div className="flex items-center gap-2 mb-6 font-mono text-[10px] tracking-[0.2em] uppercase text-[#E8440A]">
+          <span className="w-5 h-px bg-[#E8440A]"></span>
+          What Is Witness?
+        </div>
+        <h2 className="font-display text-4xl md:text-5xl font-[800] leading-[1.05] tracking-tight text-[#2C2820] mb-6">
+          A real-time news map with citizen reporting at the core.
+        </h2>
+        <p className="text-[15px] leading-[1.8] text-[#4A453F] max-w-3xl font-light mb-10">
+          Witness combines a live world events map, eyewitness reporting, and transparent trust signals in one system built for events as they unfold. People on the ground can publish geotagged updates, the community can corroborate what happened, and newsrooms can follow the signal with more context than a typical social feed.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
+          {[
+            {
+              title: 'Live world events map',
+              desc: 'Track events by location, category, and time instead of waiting for them to be flattened into a feed.',
+            },
+            {
+              title: 'Eyewitness reporting',
+              desc: 'Collect on-the-ground text, photo, and video from people who are actually there when events unfold.',
+            },
+            {
+              title: 'Transparent trust',
+              desc: 'See corroboration, disputes, and trust tiers openly so verification stays visible and legible.',
+            },
+            {
+              title: 'Newsroom context',
+              desc: 'Give journalists and editors a faster way to follow, evaluate, and license trusted eyewitness material.',
+            },
+          ].map((item) => (
+            <div key={item.title} className="bg-[#F2EFE9] p-6 hover:bg-[#EAE6DE] transition-colors">
+              <h3 className="font-display text-lg font-[700] text-[#2C2820] mb-2">{item.title}</h3>
+              <p className="text-[13px] text-[#4A453F] leading-[1.65] font-light">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Problem Statement */}
       <section className="p-8 md:p-12 lg:p-16 bg-[#EAE6DE] border-b border-[#CEC9BC]">
@@ -133,6 +173,30 @@ export default function HomePage() {
                   Learn more →
                 </Link>
               )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="p-8 md:p-12 lg:p-16 border-b border-[#CEC9BC]">
+        <div className="flex items-center gap-2 mb-6 font-mono text-[10px] tracking-[0.2em] uppercase text-[#E8440A]">
+          <span className="w-5 h-px bg-[#E8440A]"></span>
+          FAQ
+        </div>
+        <h2 className="font-display text-4xl md:text-5xl font-[800] leading-[1.05] tracking-tight text-[#2C2820] mb-6">
+          Essential questions, answered clearly.
+        </h2>
+        <p className="text-[15px] leading-[1.8] text-[#4A453F] max-w-3xl font-light mb-10">
+          For contributors, newsrooms, and anyone evaluating a new information layer, these are the questions that matter most.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#CEC9BC] border border-[#CEC9BC]">
+          {homeFaqs.map((faq) => (
+            <div key={faq.question} className="bg-[#F2EFE9] p-7 hover:bg-[#EAE6DE] transition-colors">
+              <h3 className="font-display text-xl font-[700] text-[#2C2820] mb-3 leading-[1.2]">
+                {faq.question}
+              </h3>
+              <p className="text-[13px] text-[#4A453F] leading-[1.75] font-light">{faq.answer}</p>
             </div>
           ))}
         </div>

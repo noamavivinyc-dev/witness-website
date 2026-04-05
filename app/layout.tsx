@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './styles.css'
+import { absoluteUrl, defaultRobots, siteConfig, socialImageConfig } from '@/lib/seo'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -8,36 +9,80 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Witness — Real-Time Citizen Journalism Platform',
+    default: 'Witness App | Real-Time News Map & Citizen Journalism Platform',
     template: '%s',
   },
-  description:
-    'A real-time, map-based citizen journalism platform. Anyone reports what they see. The world watches it unfold. Unfiltered. Uncentralized. Unignorable.',
-  metadataBase: new URL('https://thewitnessapp.com'),
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
+  category: 'news',
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
+    title: 'Witness App | Real-Time News Map & Citizen Journalism Platform',
+    description: siteConfig.description,
+    url: siteConfig.url,
     siteName: 'Witness',
+    locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: absoluteUrl(socialImageConfig.openGraphPath),
+        width: socialImageConfig.width,
+        height: socialImageConfig.height,
+        alt: socialImageConfig.alt,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    title: 'Witness App | Real-Time News Map & Citizen Journalism Platform',
+    description: siteConfig.description,
+    images: [absoluteUrl(socialImageConfig.twitterPath)],
   },
-  robots: 'index, follow',
+  robots: defaultRobots,
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Witness',
-  url: 'https://thewitnessapp.com',
-  description:
-    'A real-time, map-based citizen journalism platform. Unfiltered. Uncentralized. Unignorable.',
-  foundingDate: '2025',
-  contactPoint: {
-    '@type': 'ContactPoint',
-    email: 'contact@thewitnessapp.com',
-    contactType: 'customer support',
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@id': `${siteConfig.url}#organization`,
+    '@type': 'Organization',
+    name: siteConfig.name,
+    alternateName: siteConfig.alternateName,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    foundingDate: '2025',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: siteConfig.email,
+      contactType: 'customer support',
+    },
+    publishingPrinciples: `${siteConfig.url}/trust-and-safety`,
+    knowsAbout: [
+      'Citizen journalism',
+      'Eyewitness reporting',
+      'Live news mapping',
+      'Community verification',
+      'Newsroom licensing',
+    ],
   },
-}
+  {
+    '@context': 'https://schema.org',
+    '@id': `${siteConfig.url}#website`,
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    alternateName: siteConfig.alternateName,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    inLanguage: 'en-US',
+    publisher: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+  },
+]
 
 export default function RootLayout({
   children,
@@ -51,7 +96,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
         <script

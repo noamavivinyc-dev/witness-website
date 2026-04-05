@@ -1,22 +1,13 @@
 import type { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'For Newsrooms | Witness',
-  description: 'Access verified eyewitness content for your newsroom. License real-time citizen reports, geotagged footage, and on-the-ground journalism through Witness.',
-  openGraph: {
-    title: 'For Newsrooms | Witness',
-    description: 'Access verified eyewitness content and license real-time citizen reports through the Witness platform.',
-    url: 'https://thewitnessapp.com/for-newsrooms',
-    siteName: 'Witness',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'For Newsrooms | Witness',
-    description: 'Access verified eyewitness content and license real-time citizen reports through the Witness platform.',
-  },
-  alternates: { canonical: 'https://thewitnessapp.com/for-newsrooms' },
-}
+export const metadata: Metadata = createPageMetadata({
+  title: 'Verified Eyewitness Content for Newsrooms | Witness',
+  description:
+    'License verified eyewitness photos, video, and geotagged reports from the Witness platform for breaking news coverage, investigations, and field reporting.',
+  path: '/for-newsrooms',
+  keywords: ['eyewitness content for newsrooms', 'newsroom licensing', 'verified eyewitness footage'],
+})
 
 export default function ForNewsroomsLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>

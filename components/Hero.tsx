@@ -21,18 +21,38 @@ export default function Hero() {
       <div className="flex flex-col justify-center px-8 md:px-12 lg:px-16 py-16 relative z-10 lg:border-r border-[#CEC9BC]">
         <div className="flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.2em] uppercase text-[#E8440A]">
           <span className="w-5 h-px bg-[#E8440A]"></span>
-          Next-Gen News Platform
+          Witness App
         </div>
 
         <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-[800] leading-[1.02] mb-7 text-[#2C2820] tracking-tight">
-          History<br />
-          is <span style={{ WebkitTextStroke: '1.5px #2C2820', color: 'transparent' }}>happening</span><br />
-          now.
+          Witness:<br />
+          The real-time<br />
+          world events map.
         </h1>
 
-        <p className="text-base leading-relaxed text-[#4A453F] max-w-xl mb-12 font-light">
-          A real-time, map-based citizen journalism platform. Anyone reports what they see. The world watches it unfold. The truth emerges through transparency — not editorial authority.
+        <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#8A857D] mb-6">
+          History is happening now. The world needs witnesses.
         </p>
+
+        <p className="text-base leading-relaxed text-[#4A453F] max-w-xl mb-8 font-light">
+          Witness is a citizen journalism platform where anyone can report what they see and real-time world events appear on a live map. Credibility is surfaced through transparency, corroboration, and context instead of opaque ranking.
+        </p>
+
+        <div className="flex flex-wrap gap-3 mb-12">
+          {[
+            'Real-time world events',
+            'Map-native reporting',
+            'Transparent trust',
+            'Community corroboration',
+          ].map((item) => (
+            <span
+              key={item}
+              className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#4A453F] px-3 py-2 border border-[#CEC9BC] bg-[rgba(242,239,233,0.7)]"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-3 mb-16">
           <Link

@@ -21,7 +21,7 @@
   --dark2: #3D3930;
   --dark3: #524E47;
   --sans: 'Inter', sans-serif;
-  --display: 'Syne', sans-serif;
+  --display: 'Space Grotesk', sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
 
@@ -41,6 +41,9 @@ body {
   font-family: var(--sans);
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ── SECTIONS ── */

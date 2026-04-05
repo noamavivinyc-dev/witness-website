@@ -16,6 +16,7 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
     useCase: '',
     message: '',
     consentFollowUp: true,
+    companyWebsite: '',
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -67,8 +68,21 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="relative space-y-6">
       {error && <div className="bg-red-100 text-red-700 p-3 rounded text-sm">{error}</div>}
+
+      <div className="absolute left-[-5000px]" aria-hidden="true">
+        <label htmlFor="newsroom-companyWebsite">Company Website</label>
+        <input
+          id="newsroom-companyWebsite"
+          type="text"
+          name="companyWebsite"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.companyWebsite}
+          onChange={handleChange}
+        />
+      </div>
 
       <div>
         <label className="block font-mono text-xs tracking-wider uppercase text-[#8A857D] mb-2">
@@ -80,6 +94,8 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.organizationName}
           onChange={handleChange}
+          autoComplete="organization"
+          maxLength={150}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your organization"
         />
@@ -95,6 +111,8 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.contactName}
           onChange={handleChange}
+          autoComplete="name"
+          maxLength={100}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your name"
         />
@@ -110,6 +128,8 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.email}
           onChange={handleChange}
+          autoComplete="email"
+          maxLength={200}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="your@email.com"
         />
@@ -140,6 +160,7 @@ export default function NewsroomForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.useCase}
           onChange={handleChange}
+          maxLength={500}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A] resize-none"
           placeholder="How would your organization use Witness?"
           rows={3}

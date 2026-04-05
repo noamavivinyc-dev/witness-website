@@ -1,4 +1,8 @@
+import 'server-only'
+
 import { Resend } from 'resend'
+import { siteConfig } from '@/lib/seo'
+import { escapeHtml } from '@/lib/security'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -25,11 +29,11 @@ export async function sendConfirmationEmail(email: string, formType: string) {
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #2C2820; margin-bottom: 16px;">History is happening now.</h2>
-          <p style="color: #4A453F; line-height: 1.6; margin-bottom: 16px;">${message}</p>
+          <p style="color: #4A453F; line-height: 1.6; margin-bottom: 16px;">${escapeHtml(message)}</p>
           <p style="color: #8A857D; font-size: 14px;">— The Witness Team</p>
           <hr style="border: none; border-top: 1px solid #CEC9BC; margin: 32px 0;" />
           <p style="color: #8A857D; font-size: 12px;">
-            Don't want emails from Witness? <a href="https://thewitnessapp.com/unsubscribe" style="color: #E8440A;">Unsubscribe</a>
+            Don't want emails from Witness? <a href="${siteConfig.url}/unsubscribe" style="color: #E8440A;">Unsubscribe</a>
           </p>
         </div>
       `,
@@ -48,15 +52,16 @@ export async function sendAdminAlert(formType: string, contactName: string, cont
   ].filter(Boolean)
 
   const subject = `New ${formType.replace('_', ' ')} submission: ${contactName}`
+  const safeDetails = escapeHtml(JSON.stringify(details, null, 2))
   
   const html = `
     <div style="font-family: monospace; background: #F2EFE9; padding: 20px; border-radius: 4px;">
       <h3>New Form Submission</h3>
-      <p><strong>Type:</strong> ${formType}</p>
-      <p><strong>Name:</strong> ${contactName}</p>
-      <p><strong>Email:</strong> ${contactEmail}</p>
+      <p><strong>Type:</strong> ${escapeHtml(formType)}</p>
+      <p><strong>Name:</strong> ${escapeHtml(contactName)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(contactEmail)}</p>
       <pre style="background: white; padding: 12px; overflow-x: auto;">
-${JSON.stringify(details, null, 2)}
+${safeDetails}
       </pre>
       <p><a href="https://supabase.com/dashboard/project/mdowgalvrqyhsekibzbe/editor" style="color: #E8440A;">View in Supabase</a></p>
     </div>

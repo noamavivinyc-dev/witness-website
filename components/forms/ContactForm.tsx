@@ -13,6 +13,7 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
     organization: '',
     message: '',
     consentFollowUp: true,
+    companyWebsite: '',
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -64,8 +65,21 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="relative space-y-6">
       {error && <div className="bg-red-100 text-red-700 p-3 rounded text-sm">{error}</div>}
+
+      <div className="absolute left-[-5000px]" aria-hidden="true">
+        <label htmlFor="contact-companyWebsite">Company Website</label>
+        <input
+          id="contact-companyWebsite"
+          type="text"
+          name="companyWebsite"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.companyWebsite}
+          onChange={handleChange}
+        />
+      </div>
 
       <div>
         <label className="block font-mono text-xs tracking-wider uppercase text-[#8A857D] mb-2">
@@ -77,6 +91,8 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.name}
           onChange={handleChange}
+          autoComplete="name"
+          maxLength={100}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your name"
         />
@@ -92,6 +108,8 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.email}
           onChange={handleChange}
+          autoComplete="email"
+          maxLength={200}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="your@email.com"
         />
@@ -123,6 +141,8 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           name="organization"
           value={formData.organization}
           onChange={handleChange}
+          autoComplete="organization"
+          maxLength={150}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A]"
           placeholder="Your organization"
         />
@@ -137,6 +157,7 @@ export default function ContactForm({ onSuccess }: { onSuccess: () => void }) {
           required
           value={formData.message}
           onChange={handleChange}
+          maxLength={1000}
           className="w-full px-3 py-3 border border-[#CEC9BC] rounded bg-white text-[#2C2820] text-base focus:outline-none focus:border-[#E8440A] resize-none"
           placeholder="Tell us more about your inquiry"
           rows={4}

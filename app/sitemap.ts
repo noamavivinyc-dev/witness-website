@@ -1,47 +1,46 @@
 import type { MetadataRoute } from 'next'
+import { absoluteUrl } from '@/lib/seo'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://thewitnessapp.com'
-
   return [
     {
-      url: baseUrl,
+      url: absoluteUrl('/'),
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/platform`,
+      url: absoluteUrl('/platform'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/about`,
+      url: absoluteUrl('/about'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/for-newsrooms`,
+      url: absoluteUrl('/for-newsrooms'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/for-contributors`,
+      url: absoluteUrl('/for-contributors'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/trust-and-safety`,
+      url: absoluteUrl('/trust-and-safety'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/pricing`,
+      url: absoluteUrl('/pricing'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
