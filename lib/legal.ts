@@ -1,8 +1,8 @@
 export const TERMS_OF_SERVICE_VERSION = '1.0'
-export const TERMS_OF_SERVICE_DATE = 'April 2025'
+export const TERMS_OF_SERVICE_DATE = 'April 7, 2026'
 export const TERMS_OF_SERVICE = `
 WITNESS TERMS OF SERVICE
-Last updated: April 2025
+Last updated: April 7, 2026
 
 1. ACCEPTANCE OF TERMS
 
@@ -154,10 +154,10 @@ Appeals: appeals@thewitnessapp.com
 `
 
 export const PRIVACY_POLICY_VERSION = '1.0'
-export const PRIVACY_POLICY_DATE = 'April 2025'
+export const PRIVACY_POLICY_DATE = 'April 7, 2026'
 export const PRIVACY_POLICY = `
 WITNESS PRIVACY POLICY
-Last updated: April 2025
+Last updated: April 7, 2026
 
 1. WHO WE ARE
 
@@ -316,10 +316,10 @@ Security concerns: security@thewitnessapp.com
 `
 
 export const CONTENT_POLICY_VERSION = '1.0'
-export const CONTENT_POLICY_DATE = 'April 2025'
+export const CONTENT_POLICY_DATE = 'April 7, 2026'
 export const CONTENT_POLICY = `
 WITNESS CONTENT POLICY
-Last updated: April 2025
+Last updated: April 7, 2026
 
 1. PURPOSE
 
@@ -410,10 +410,10 @@ To report CSAM or imminent threat of violence: safety@thewitnessapp.com (monitor
 `
 
 export const DMCA_POLICY_VERSION = '1.0'
-export const DMCA_POLICY_DATE = 'April 2025'
+export const DMCA_POLICY_DATE = 'April 7, 2026'
 export const DMCA_POLICY = `
 WITNESS DMCA AND COPYRIGHT POLICY
-Last updated: April 2025
+Last updated: April 7, 2026
 
 1. OUR COMMITMENT
 
