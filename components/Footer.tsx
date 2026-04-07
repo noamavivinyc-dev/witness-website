@@ -40,8 +40,17 @@ export default function Footer() {
         </div>
       </div>
       <div className="px-8 md:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
-        <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[rgba(242,239,233,0.25)]">
-          © 2025 Witness · All rights reserved
+        <div className="flex items-center gap-4">
+          <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[rgba(242,239,233,0.25)]">
+            © 2025 Witness · All rights reserved
+          </div>
+          <div className="flex items-center gap-3">
+            <Link href="/legal/terms" className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(242,239,233,0.25)] no-underline hover:text-[rgba(242,239,233,0.5)] transition-colors">Terms</Link>
+            <span className="text-[rgba(242,239,233,0.15)] text-[9px]">·</span>
+            <Link href="/legal/privacy" className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(242,239,233,0.25)] no-underline hover:text-[rgba(242,239,233,0.5)] transition-colors">Privacy</Link>
+            <span className="text-[rgba(242,239,233,0.15)] text-[9px]">·</span>
+            <Link href="/legal" className="font-mono text-[9px] tracking-[0.12em] uppercase text-[rgba(242,239,233,0.25)] no-underline hover:text-[rgba(242,239,233,0.5)] transition-colors">Legal</Link>
+          </div>
         </div>
         <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-[rgba(242,239,233,0.25)]">
           History is happening now.
